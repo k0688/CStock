@@ -1,9 +1,16 @@
+import java.util.InputMismatchException;
+
 public class commands {
     public static void GetCommand(String command) throws Exception
     {
         String[] parts = command.split(" ");
+        try{
         switch(parts[0])
         {
+            default:
+            sc.print("The command you entered does not exist.");
+            master.main(null);
+            break;
             case "add":
             master.WriteFile(parts[1], Integer.parseInt(parts[2]));
             break;
@@ -26,6 +33,7 @@ public class commands {
             HelpCommand();
             break;
         }
+    } catch(ArrayIndexOutOfBoundsException e) {sc.print("The given arguments were wrong. Enter help to get the command list."); master.main(null);}
     }
 
     public static void HelpCommand()
