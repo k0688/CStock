@@ -18,7 +18,7 @@ public class master {
 
     public static void RemoveFile(int index) throws Exception
     {
-        File file = new File("string.txt");
+        File file = new File("stock.cstock");
         Scanner reader = new Scanner(file);
         String content = "";
         while (reader.hasNextLine()) {
@@ -36,7 +36,7 @@ public class master {
                 result += "%" + parts[i];
             }
         }
-        FileWriter writer = new FileWriter("string.txt");
+        FileWriter writer = new FileWriter("stock.cstock");
         writer.write(result);
         writer.close();
         reader.close();
@@ -45,7 +45,7 @@ public class master {
 
     public static void SetStock(int index, int stock) throws Exception
     {
-        File file = new File("string.txt");
+        File file = new File("stock.cstock");
         Scanner reader = new Scanner(file);
         String content = "";
         while (reader.hasNextLine()) {
@@ -62,7 +62,7 @@ public class master {
                 result += "%" + parts[i];
             }
         }
-        FileWriter writer = new FileWriter("string.txt");
+        FileWriter writer = new FileWriter("stock.cstock");
         writer.write(result);
         writer.close();
         reader.close();
@@ -71,7 +71,7 @@ public class master {
 
     public static void EditStock(boolean positive, int index, int stock) throws Exception
     {
-        File file = new File("string.txt");
+        File file = new File("stock.cstock");
         Scanner reader = new Scanner(file);
         String content = "";
         while (reader.hasNextLine()) {
@@ -91,7 +91,7 @@ public class master {
                 result += "%" + parts[i];
             }
         }
-        FileWriter writer = new FileWriter("string.txt");
+        FileWriter writer = new FileWriter("stock.cstock");
         writer.write(result);
         writer.close();
         reader.close();
@@ -100,7 +100,7 @@ public class master {
 
     public static void UnpackFile() throws FileNotFoundException
     {
-        File file = new File("string.txt");
+        File file = new File("stock.cstock");
         Scanner reader = new Scanner(file);
         String content = "";
         while (reader.hasNextLine()) {
@@ -117,7 +117,7 @@ public class master {
     }
 
     public static void WriteFile(String text, int count) throws IOException {
-    File file = new File("string.txt");
+    File file = new File("stock.cstock");
     if (!file.exists()) {
         file.createNewFile();
     }
@@ -128,7 +128,7 @@ public class master {
         content = content + data;
     }
     reader.close();
-    FileWriter writer = new FileWriter("string.txt");
+    FileWriter writer = new FileWriter("stock.cstock");
     writer.write(content + "%" + text + "%" + count);
     writer.close();
 
