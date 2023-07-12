@@ -14,8 +14,10 @@ public class master {
         {
         sc.print("Nennen Sie den Eintrag: ");
         String text = scanner.nextLine();
+        sc.print("Nennen sie den Bestand: ");
+        int count = scanner.nextInt();
         try {
-            WriteFile(text);
+            WriteFile(text, count);
         } catch (IOException e) {
         }
         ;
@@ -39,13 +41,13 @@ public class master {
             content = content + data;
         }
         String[] parts = content.split("%");
-        for(String part : parts)
+        for(int i = 1; i < parts.length; i += 2)
         {
-            sc.print(part);
+            sc.print(parts[i] + " - " + parts[i + 1]);
         }
     }
 
-    public static void WriteFile(String text) throws IOException {
+    public static void WriteFile(String text, int count) throws IOException {
         File file = new File("string.txt");
         if (!file.exists()) {
             file.createNewFile();
@@ -58,7 +60,7 @@ public class master {
         }
         reader.close();
     FileWriter writer = new FileWriter("string.txt");
-    writer.write(content + "%" + text);
+    writer.write(content + "%" + text + "%" + count);
     writer.close();
 
     main(null);
