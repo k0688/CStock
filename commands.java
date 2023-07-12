@@ -7,8 +7,14 @@ public class commands {
             case "add":
             master.WriteFile(parts[1], Integer.parseInt(parts[2]));
             break;
-            case "stock":
-            master.ChangeStock(Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+            case "set":
+            master.SetStock(Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+            break;
+            case "inc":
+            master.EditStock(true, Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+            break;
+            case "dec":
+            master.EditStock(false, Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
             break;
             case "remove":
             master.RemoveFile(Integer.parseInt(parts[1]));
@@ -26,7 +32,9 @@ public class commands {
     {
         sc.print("-- Command List --");
         sc.print("add <name> <stock>");
-        sc.print("stock <index> <stock>");
+        sc.print("set <index> <stock>");
+        sc.print("inc <index> <stock>");
+        sc.print("dec <index> <stock>");
         sc.print("remove <index>");
         sc.print("list");
         master.main(null);

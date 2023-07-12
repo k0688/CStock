@@ -43,7 +43,7 @@ public class master {
         main(null);
     }
 
-    public static void ChangeStock(int index, int stock) throws Exception
+    public static void SetStock(int index, int stock) throws Exception
     {
         File file = new File("string.txt");
         Scanner reader = new Scanner(file);
@@ -54,6 +54,35 @@ public class master {
         }
         String[] parts = content.split("%");
         parts[index * 2] = Integer.toString(stock);
+        String result = "";
+        for(int i = 1; i < parts.length; i++)
+        {
+            if(!parts[i].equals(""))
+            {
+                result += "%" + parts[i];
+            }
+        }
+        FileWriter writer = new FileWriter("string.txt");
+        writer.write(result);
+        writer.close();
+        reader.close();
+        main(null);
+    }
+
+    public static void EditStock(boolean positive, int index, int stock) throws Exception
+    {
+        File file = new File("string.txt");
+        Scanner reader = new Scanner(file);
+        String content = "";
+        while (reader.hasNextLine()) {
+            String data = reader.nextLine();
+            content = content + data;
+        }
+        String[] parts = content.split("%");
+        if(positive)
+        {
+            parts[index * 2] = Integer.toString(Integer.parseInt(parts[index * 2]) + stock);
+        } else {parts[index * 2] = Integer.toString(Integer.parseInt(parts[index * 2]) - stock);}
         String result = "";
         for(int i = 1; i < parts.length; i++)
         {
