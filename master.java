@@ -10,13 +10,30 @@ public class master {
         sc.print("Willkommen bei diesem Tool!");
         String text = scanner.nextLine();
         try {
-            WriteToFile(text);
+            UnpackFile();
+            WriteFile(text);
         } catch (IOException e) {
         }
         ;
     }
 
-    public static void WriteToFile(String text) throws IOException {
+    public static void UnpackFile() throws FileNotFoundException
+    {
+        File file = new File("string.txt");
+        Scanner reader = new Scanner(file);
+        String content = "";
+        while (reader.hasNextLine()) {
+            String data = reader.nextLine();
+            content = content + data;
+        }
+        String[] parts = content.split("%");
+        for(String part : parts)
+        {
+            sc.print(part);
+        }
+    }
+
+    public static void WriteFile(String text) throws IOException {
         File file = new File("string.txt");
         if (!file.exists()) {
             file.createNewFile();
@@ -29,7 +46,7 @@ public class master {
         }
         reader.close();
     FileWriter writer = new FileWriter("string.txt");
-    writer.write(content + text);
+    writer.write(content + "%" + text);
     writer.close();
 
     main(null);
