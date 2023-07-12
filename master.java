@@ -8,13 +8,25 @@ public class master {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         sc.print("Willkommen bei diesem Tool!");
+        sc.print("[add] or [list]");
+        String answer = scanner.nextLine();
+        if(answer.equals("add"))
+        {
+        sc.print("Nennen Sie den Eintrag: ");
         String text = scanner.nextLine();
         try {
-            UnpackFile();
             WriteFile(text);
         } catch (IOException e) {
         }
         ;
+        }
+        else if(answer.equals("list"))
+        {
+            try{
+                UnpackFile();
+            }
+            catch(Exception e) {}
+        }
     }
 
     public static void UnpackFile() throws FileNotFoundException
