@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
@@ -7,15 +8,22 @@ import java.io.IOException;
 public class master {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        sc.print("Willkommen bei diesem Tool!");
+        sc.print("Welcome to CStock!");
         sc.print("[add] or [remove] or [list]");
         String answer = scanner.nextLine();
         if(answer.equals("add"))
         {
-        sc.print("Nennen Sie den Eintrag: ");
+        sc.print("Name the item you want to add: ");
         String text = scanner.nextLine();
-        sc.print("Nennen sie den Bestand: ");
-        int count = scanner.nextInt();
+        sc.print("Name the stock: ");
+        int count = 0;
+        try{
+            count = scanner.nextInt();
+        } catch(InputMismatchException e)
+        {
+            sc.print("You must enter an integer!");
+            main(null);
+        }
         try {
             WriteFile(text, count);
         } catch (IOException e) {
@@ -24,7 +32,7 @@ public class master {
         }
         else if(answer.equals("remove"))
         {
-            sc.print("Nennen Sie den Index des Eintrages den sie entfernen möchten: ");
+            sc.print("Name the index of the item you want to remove: ");
             int index = scanner.nextInt();
             try{
                 RemoveFile(index);
