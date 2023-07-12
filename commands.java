@@ -16,6 +16,19 @@ public class commands {
             case "list":
             master.UnpackFile();
             break;
+            case "help":
+            HelpCommand();
+            break;
         }
+    }
+
+    public static void HelpCommand()
+    {
+        sc.print("-- Command List --");
+        sc.print("add <name> <stock>");
+        sc.print("stock <index> <stock>");
+        sc.print("remove <index>");
+        sc.print("list");
+        master.main(null);
     }
 }
