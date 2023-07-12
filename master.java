@@ -9,51 +9,10 @@ public class master {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         sc.print("Welcome to CStock!");
-        sc.print("[add] or [stock] or [remove] or [list]");
-        String answer = scanner.nextLine();
-        if(answer.equals("add"))
-        {
-        sc.print("Name the item you want to add: ");
-        String text = scanner.nextLine();
-        sc.print("Name the stock: ");
-        int count = 0;
+        String command = scanner.nextLine();
         try{
-            count = scanner.nextInt();
-        } catch(InputMismatchException e)
-        {
-            sc.print("You must enter an integer!");
-            main(null);
-        }
-        try {
-            WriteFile(text, count);
-        } catch (IOException e) {}
-        }
-        else if(answer.equals("stock"))
-        {
-            sc.print("Name the index of the item you want to change the stock of: ");
-            int index = scanner.nextInt();
-            sc.print("Name the new stock: ");
-            int stock = scanner.nextInt();
-            try{
-                ChangeStock(index, stock);
-            } catch(Exception e) {}
-
-        }
-        else if(answer.equals("remove"))
-        {
-            sc.print("Name the index of the item you want to remove: ");
-            int index = scanner.nextInt();
-            try{
-                RemoveFile(index);
-            } catch(Exception e) {}
-        }
-        else if(answer.equals("list"))
-        {
-            try{
-                UnpackFile();
-            }
-            catch(Exception e) {}
-        }
+            commands.GetCommand(command);
+        } catch(Exception e) {}
         scanner.close();
     }
 
