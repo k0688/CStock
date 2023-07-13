@@ -116,6 +116,26 @@ public class master {
         main(null);
     }
 
+    public static void FullFile() throws IOException, FileNotFoundException
+    {
+        File file = new File("stock.cstock");
+        Scanner reader = new Scanner(file);
+        String content = "";
+        while (reader.hasNextLine()) {
+            String data = reader.nextLine();
+            content = content + data;
+        }
+        String[] stock_parts = content.split("%");
+        String[]  description_parts = description.UnpackDescription();
+        for(int i = 1; i < stock_parts.length; i += 2)
+        {
+            sc.print((i / 2 + 1) + "# " + stock_parts[i] + " - " + stock_parts[i + 1]);
+            sc.print(description_parts[i / 2]);
+        }
+        reader.close();
+        main(null);
+    }
+
     public static void WriteFile(String text, int count) throws IOException {
     File file = new File("stock.cstock");
     if (!file.exists()) {

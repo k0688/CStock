@@ -12,7 +12,16 @@ public class commands {
             master.main(null);
             break;
             case "add":
+            description.AddDescription();
             master.WriteFile(parts[1], Integer.parseInt(parts[2]));
+            break;
+            case "description":
+            String result = "";
+            for(int i = 2; i < parts.length; i++)
+            {
+                result += parts[i] + " ";
+            }
+            description.EditDescription(Integer.parseInt(parts[1]), result);
             break;
             case "set":
             master.SetStock(Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
@@ -24,10 +33,14 @@ public class commands {
             master.EditStock(false, Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
             break;
             case "remove":
+            description.RemoveDescription(Integer.parseInt(parts[1]));
             master.RemoveFile(Integer.parseInt(parts[1]));
             break;
             case "list":
             master.UnpackFile();
+            break;
+            case "full_list":
+            master.FullFile();
             break;
             case "help":
             HelpCommand();
@@ -40,11 +53,13 @@ public class commands {
     {
         sc.print("-- Command List --");
         sc.print("add <name> <stock>");
+        sc.print("description <index> <description>");
         sc.print("set <index> <stock>");
         sc.print("inc <index> <stock>");
         sc.print("dec <index> <stock>");
         sc.print("remove <index>");
         sc.print("list");
+        sc.print("full_list");
         master.main(null);
     }
 }
