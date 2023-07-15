@@ -1,5 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
-
+import java.util.Locale;
+import java.util.Scanner;
 public class commands {
     public static void GetCommand(String command) throws Exception
     {
@@ -32,6 +36,9 @@ public class commands {
             case "dec":
             master.EditStock(false, Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
             break;
+            case "search":
+            SearchFile(parts[1]);
+            break;
             case "remove":
             description.RemoveDescription(Integer.parseInt(parts[1]));
             master.RemoveFile(Integer.parseInt(parts[1]));
@@ -48,6 +55,35 @@ public class commands {
         }
     } catch(ArrayIndexOutOfBoundsException e) {sc.print("The given arguments were wrong. Enter help to get the command list."); master.main(null);}
     }
+
+    public static void SearchFile(String name) throws FileNotFoundException {
+        File file = new File("stock.cstock");
+        Scanner reader = new Scanner(file);
+        String content = "";
+        while (reader.hasNextLine()) {
+            String data = reader.nextLine();
+            content = content + data;
+        }
+        String[] parts = content.split("%");
+        int counter = 0;
+        ArrayList<String> results = new ArrayList<>();
+        ArrayList<Integer> indexes = new ArrayList<>();
+        ArrayList<Integer> stocks = new ArrayList<>();
+        for (int i = 1; i < parts.length; i += 2) {
+            if (parts[i].toLowerCase(Locale.ENGLISH).contains(name.toLowerCase(Locale.ENGLISH))) {
+                results.add(parts[i]);
+                stocks.add(Integer.parseInt(parts[i + 1]));
+                indexes.add(i / 2 + 1);
+                counter++;
+            }
+        }
+        for (int i = 0; i < counter; i++) {
+            System.out.println(indexes.get(i) + "# " + results.get(i) + " - " + stocks.get(i));
+        }
+        reader.close();
+        master.main(null);
+    }
+    
 
     public static void HelpCommand()
     {
