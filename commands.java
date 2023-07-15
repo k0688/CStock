@@ -93,6 +93,7 @@ public class commands {
         sc.print("set <index> <stock>");
         sc.print("inc <index> <stock>");
         sc.print("dec <index> <stock>");
+        sc.print("search <query>");
         sc.print("remove <index>");
         sc.print("list");
         sc.print("full_list");
