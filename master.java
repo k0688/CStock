@@ -7,6 +7,7 @@ import java.io.IOException;
 
 public class master {
     public static void main(String[] args) {
+        frame.main(null);
         Scanner scanner = new Scanner(System.in);
         sc.print("Welcome to CStock!");
         String command = scanner.nextLine();
@@ -40,7 +41,6 @@ public class master {
         writer.write(result);
         writer.close();
         reader.close();
-        main(null);
     }
 
     public static void SetStock(int index, int stock) throws Exception
@@ -66,7 +66,6 @@ public class master {
         writer.write(result);
         writer.close();
         reader.close();
-        main(null);
     }
 
     public static void EditStock(boolean positive, int index, int stock) throws Exception
@@ -151,7 +150,5 @@ public class master {
     FileWriter writer = new FileWriter("stock.cstock");
     writer.write(content + "%" + text + "%" + count);
     writer.close();
-
-    main(null);
     }
 }
