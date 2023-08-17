@@ -1,3 +1,5 @@
 
 *.cstock
 *.class
+.project
+.classpath

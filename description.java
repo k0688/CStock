@@ -9,11 +9,12 @@ public class description {
     {
         File file = new File("description.cstock");
         Scanner reader = new Scanner(file);
-        String content = "";
+        String text = "";
         while (reader.hasNextLine()) {
             String data = reader.nextLine();
-            content = content + data;
+            text = text + data;
         }
+        String content = encryption.Decrypt(text);
         String[] parts = content.split("%");
         return parts;
     }
@@ -22,11 +23,12 @@ public class description {
     {
         File file = new File("description.cstock");
         Scanner reader = new Scanner(file);
-        String content = "";
+        String text = "";
         while (reader.hasNextLine()) {
             String data = reader.nextLine();
-            content = content + data;
+            text = text + data;
         }
+        String content = encryption.Decrypt(text);
         String[] parts = content.split("%");
         parts[index - 1] = "";
         String result = "";
@@ -38,7 +40,7 @@ public class description {
             }
         }
         FileWriter writer = new FileWriter("description.cstock");
-        writer.write(result);
+        writer.write(encryption.Encrypt(result));
         writer.close();
         reader.close();
     }
@@ -49,14 +51,15 @@ public class description {
         file.createNewFile();
     }
     Scanner reader = new Scanner(file);
-    String content = "";
+    String text = "";
     while (reader.hasNextLine()) {
         String data = reader.nextLine();
-        content = content + data;
+        text = text + data;
     }
     reader.close();
+    String content = encryption.Decrypt(text);
     FileWriter writer = new FileWriter("description.cstock");
-    writer.write(content + "Use the description command to add a description" + "%");
+    writer.write(encryption.Encrypt(content + "Use the description command to add a description" + "%"));
     writer.close();
     }
 
@@ -64,11 +67,12 @@ public class description {
     {
         File file = new File("description.cstock");
         Scanner reader = new Scanner(file);
-        String content = "";
+        String text = "";
         while (reader.hasNextLine()) {
             String data = reader.nextLine();
-            content = content + data;
+            text = text + data;
         }
+        String content = encryption.Decrypt(text);
         String[] parts = content.split("%");
         parts[index - 1] = description;
         String result = "";
@@ -80,9 +84,9 @@ public class description {
             }
         }
         FileWriter writer = new FileWriter("description.cstock");
-        writer.write(result);
+        writer.write(encryption.Encrypt(result));
         writer.close();
         reader.close();
-        master.main(null);
+        sc.print("The description was changed.");
     }
 }

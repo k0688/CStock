@@ -6,26 +6,34 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class master {
-    public static void main(String[] args) {
-        frame.main(null);
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) 
+    {
         sc.print("Welcome to CStock!");
+    	StartApp();
+    }
+    
+    public static void StartApp()
+    {
+        Scanner scanner = new Scanner(System.in);
+    	while(true)
+    	{
         String command = scanner.nextLine();
         try{
             commands.GetCommand(command);
         } catch(Exception e) {}
-        scanner.close();
+    	}
     }
 
     public static void RemoveFile(int index) throws Exception
     {
         File file = new File("stock.cstock");
         Scanner reader = new Scanner(file);
-        String content = "";
+        String text = "";
         while (reader.hasNextLine()) {
             String data = reader.nextLine();
-            content = content + data;
+            text = text + data;
         }
+        String content = encryption.Decrypt(text);
         String[] parts = content.split("%");
         parts[index * 2] = "";
         parts[index * 2 - 1] = "";
@@ -38,20 +46,22 @@ public class master {
             }
         }
         FileWriter writer = new FileWriter("stock.cstock");
-        writer.write(result);
+        writer.write(encryption.Encrypt(result));
         writer.close();
         reader.close();
+        sc.print("The entry was removed.");
     }
 
     public static void SetStock(int index, int stock) throws Exception
     {
         File file = new File("stock.cstock");
         Scanner reader = new Scanner(file);
-        String content = "";
+        String text = "";
         while (reader.hasNextLine()) {
             String data = reader.nextLine();
-            content = content + data;
+            text = text + data;
         }
+        String content = encryption.Decrypt(text);
         String[] parts = content.split("%");
         parts[index * 2] = Integer.toString(stock);
         String result = "";
@@ -63,20 +73,22 @@ public class master {
             }
         }
         FileWriter writer = new FileWriter("stock.cstock");
-        writer.write(result);
+        writer.write(encryption.Encrypt(result));
         writer.close();
         reader.close();
+        sc.print("The stock was set.");
     }
 
     public static void EditStock(boolean positive, int index, int stock) throws Exception
     {
         File file = new File("stock.cstock");
         Scanner reader = new Scanner(file);
-        String content = "";
+        String text = "";
         while (reader.hasNextLine()) {
             String data = reader.nextLine();
-            content = content + data;
+            text = text + data;
         }
+        String content = encryption.Decrypt(text);
         String[] parts = content.split("%");
         if(positive)
         {
@@ -91,39 +103,40 @@ public class master {
             }
         }
         FileWriter writer = new FileWriter("stock.cstock");
-        writer.write(result);
+        writer.write(encryption.Encrypt(result));
         writer.close();
         reader.close();
-        main(null);
+        sc.print("The stock was changed.");
     }
 
     public static void UnpackFile() throws FileNotFoundException
     {
         File file = new File("stock.cstock");
         Scanner reader = new Scanner(file);
-        String content = "";
+        String text = "";
         while (reader.hasNextLine()) {
             String data = reader.nextLine();
-            content = content + data;
+            text = text + data;
         }
+        String content = encryption.Decrypt(text);
         String[] parts = content.split("%");
         for(int i = 1; i < parts.length; i += 2)
         {
             sc.print((i / 2 + 1) + "# " + parts[i] + " - " + parts[i + 1]);
         }
         reader.close();
-        main(null);
     }
 
     public static void FullFile() throws IOException, FileNotFoundException
     {
         File file = new File("stock.cstock");
         Scanner reader = new Scanner(file);
-        String content = "";
+        String text = "";
         while (reader.hasNextLine()) {
             String data = reader.nextLine();
-            content = content + data;
+            text = text + data;
         }
+        String content = encryption.Decrypt(text);
         String[] stock_parts = content.split("%");
         String[]  description_parts = description.UnpackDescription();
         for(int i = 1; i < stock_parts.length; i += 2)
@@ -132,7 +145,6 @@ public class master {
             sc.print(description_parts[i / 2]);
         }
         reader.close();
-        main(null);
     }
 
     public static void WriteFile(String text, int count) throws IOException {
@@ -141,14 +153,16 @@ public class master {
         file.createNewFile();
     }
     Scanner reader = new Scanner(file);
-    String content = "";
+    String txt = "";
     while (reader.hasNextLine()) {
         String data = reader.nextLine();
-        content = content + data;
+        txt = txt + data;
     }
     reader.close();
+    String content = encryption.Decrypt(txt);
     FileWriter writer = new FileWriter("stock.cstock");
-    writer.write(content + "%" + text + "%" + count);
+    writer.write(encryption.Encrypt(content + "%" + text + "%" + count));
     writer.close();
+    sc.print("Added " + text + " with count " + count + " to stock.");
     }
 }

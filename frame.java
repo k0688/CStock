@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -28,11 +29,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
-public class frame {
+public class frame implements Runnable{
 	
 	public static JFrame window;
 	public static JPanel panel;
@@ -40,19 +42,21 @@ public class frame {
 	public static JTextField filefield;
 	public static JComboBox<String> fileformat;
 	public static String path;
-	public static void main(String[] args)
+	
+	@Override
+	public void run()
 	{
 		window = CreateWindow();
 		window.setVisible(true);
 		path = "notpath";
+		
 	}
-	
-	public static JFrame CreateWindow()
+	public JFrame CreateWindow()
 	{
 		window = new JFrame();
 		window.setSize(500, 500);
 		window.setTitle("CStock");
-		window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
+		window.setDefaultCloseOperation(window.DISPOSE_ON_CLOSE);
 		ImageIcon img = new ImageIcon("assets\\logoscreenshot.png");
 		window.setIconImage(img.getImage());
 		window.setLocationRelativeTo(null);
@@ -72,7 +76,8 @@ public class frame {
 		return window;
 	}
 
-    public static JButton AddButton()
+
+    public JButton AddButton()
     {
         JButton button = new JButton("Add");
         button.addActionListener(new ActionListener() {
@@ -112,7 +117,7 @@ public class frame {
                             frame.dispose();
                             window.setVisible(false);
                             window.dispose();
-                            main(null);
+                            run();
                         } catch(Exception exception) {}
                     }
                 });
@@ -126,7 +131,7 @@ public class frame {
         return button;
     }
 
-    public static JButton RemoveButton()
+    public JButton RemoveButton()
     {
         JButton button = new JButton("Remove");
         button.addActionListener(new ActionListener() {
@@ -160,7 +165,7 @@ public class frame {
                             frame.dispose();
                             window.setVisible(false);
                             window.dispose();
-                            main(null);
+                            run();
                         } catch(Exception exception) {}
                     }
                 });
@@ -174,7 +179,7 @@ public class frame {
         return button;
     }
 
-    public static JButton SetButton()
+    public JButton SetButton()
     {
         JButton button = new JButton("Set");
         button.addActionListener(new ActionListener() {
@@ -214,7 +219,7 @@ public class frame {
                             frame.dispose();
                             window.setVisible(false);
                             window.dispose();
-                            main(null);
+                            run();
                         } catch(Exception exception) {}
                     }
                 });
@@ -227,14 +232,14 @@ public class frame {
         button.setBounds(400, 100, 100, 50);
         return button;
     }
-    public static JLabel CreateLabel(String text, int x, int y)
+    public JLabel CreateLabel(String text, int x, int y)
     {
         JLabel label = new JLabel(text);
         label.setBounds(x, y, 30, 30);
         return label;
     }
     
-    public static JToolBar CreateToolBar()
+    public JToolBar CreateToolBar()
     {
         JToolBar bar = new JToolBar();
         bar.setOrientation(1);
@@ -252,7 +257,7 @@ public class frame {
         return bar;
     }
 
-    public static ArrayList<String> UnpackToolBar() throws FileNotFoundException
+    public ArrayList<String> UnpackToolBar() throws FileNotFoundException
     {
         File file = new File("stock.cstock");
         Scanner reader = new Scanner(file);

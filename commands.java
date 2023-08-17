@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
-public class commands {
+public class commands
+{
     public static void GetCommand(String command) throws Exception
     {
         String[] parts = command.split(" ");
@@ -13,7 +14,7 @@ public class commands {
         {
             default:
             sc.print("The command you entered does not exist.");
-            master.main(null);
+            master.StartApp();
             break;
             case "add":
             description.AddDescription();
@@ -43,6 +44,12 @@ public class commands {
             description.RemoveDescription(Integer.parseInt(parts[1]));
             master.RemoveFile(Integer.parseInt(parts[1]));
             break;
+            case "opengui":
+            sc.print("The GUI was opened.");
+            frame x = new frame();
+            Thread thread = new Thread(x);
+            thread.start();
+            break;
             case "list":
             master.UnpackFile();
             break;
@@ -53,17 +60,18 @@ public class commands {
             HelpCommand();
             break;
         }
-    } catch(ArrayIndexOutOfBoundsException e) {sc.print("The given arguments were wrong. Enter help to get the command list."); master.main(null);}
+    } catch(ArrayIndexOutOfBoundsException e) {sc.print("The given arguments were wrong. Enter help to get the command list."); master.StartApp();}
     }
 
     public static void SearchFile(String name) throws FileNotFoundException {
         File file = new File("stock.cstock");
         Scanner reader = new Scanner(file);
-        String content = "";
+        String text = "";
         while (reader.hasNextLine()) {
             String data = reader.nextLine();
-            content = content + data;
+            text = text + data;
         }
+        String content = encryption.Decrypt(text);
         String[] parts = content.split("%");
         int counter = 0;
         ArrayList<String> results = new ArrayList<>();
@@ -81,7 +89,6 @@ public class commands {
             System.out.println(indexes.get(i) + "# " + results.get(i) + " - " + stocks.get(i));
         }
         reader.close();
-        master.main(null);
     }
     
 
@@ -95,8 +102,8 @@ public class commands {
         sc.print("dec <index> <stock>");
         sc.print("search <query>");
         sc.print("remove <index>");
+        sc.print("opengui");
         sc.print("list");
         sc.print("full_list");
-        master.main(null);
     }
 }
