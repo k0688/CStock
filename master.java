@@ -8,8 +8,23 @@ import java.io.IOException;
 public class master {
     public static void main(String[] args) 
     {
-        sc.print("Welcome to CStock!");
-    	StartApp();
+    	if(args.length == 0)
+    	{
+            sc.print("Welcome to CStock!");
+        	StartApp();	
+    	}
+    	else
+    	{
+    		String command = "";
+    		for(int i = 0; i < args.length; i++)
+    		{
+    			command += args[i] + " ";
+    		}
+    		try
+    		{
+        		commands.GetCommand(command);	
+    		} catch(Exception e) {}
+    	}
     }
     
     public static void StartApp()

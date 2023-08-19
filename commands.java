@@ -14,7 +14,6 @@ public class commands
         {
             default:
             sc.print("The command you entered does not exist.");
-            master.StartApp();
             break;
             case "add":
             description.AddDescription();
@@ -44,12 +43,6 @@ public class commands
             description.RemoveDescription(Integer.parseInt(parts[1]));
             master.RemoveFile(Integer.parseInt(parts[1]));
             break;
-            case "opengui":
-            sc.print("The GUI was opened.");
-            frame x = new frame();
-            Thread thread = new Thread(x);
-            thread.start();
-            break;
             case "list":
             master.UnpackFile();
             break;
@@ -60,7 +53,7 @@ public class commands
             HelpCommand();
             break;
         }
-    } catch(ArrayIndexOutOfBoundsException e) {sc.print("The given arguments were wrong. Enter help to get the command list."); master.StartApp();}
+    } catch(ArrayIndexOutOfBoundsException e) {sc.print("The given arguments were wrong. Enter help to get the command list.");}
     }
 
     public static void SearchFile(String name) throws FileNotFoundException {
@@ -102,7 +95,6 @@ public class commands
         sc.print("dec <index> <stock>");
         sc.print("search <query>");
         sc.print("remove <index>");
-        sc.print("opengui");
         sc.print("list");
         sc.print("full_list");
     }
