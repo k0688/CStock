@@ -1,2 +1,2 @@
 # CStock
-CStock is a cli java application for inventory management.
+CStock is a acli java application for inventory management.
